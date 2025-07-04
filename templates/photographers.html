@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Available Photographer</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background:url('https://th.bing.com/th/id/OIP.Cu9M7xZ9fPeBaKRHojm-KAHaE7?o=7rm=3&rs=1&pid=ImgDetMain')no-repeat center center fixed;
+      background-size: cover;
+      text-align: center;
+      padding: 40px;
+    }
+
+    h2 {
+      color: #ffffffce;
+      margin-bottom: 30px;
+    }
+
+    .card-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .photographer-card {
+      background: #302d2d;
+      padding: 23px;
+      width: 300px;
+      border-radius: 10px;
+      text-align: left;
+    }
+
+    .photographer-card img {
+      width: 100%;
+      height: 180px; /* Reduced height */
+      object-fit: cover;
+      border-radius: 8px;
+      margin-bottom: 10px;
+    }
+
+    .photographer-name {
+      font-size: 1.3em;
+      color: #db2e07;
+      margin: 10px 0 5px;
+    }
+
+    .skills, .availability {
+      margin: 6px 0;
+      color: #fff;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
+      font-size: 0.95em;
+    }
+
+    .book-btn {
+      background-color: #3498db;
+      color: white;
+      padding: 8px 15px;
+      text-decoration: none;
+      border-radius: 5px;
+      display: inline-block;
+      margin-top: 10px;
+      font-size: 0.9em;
+    }
+
+    .book-btn:hover {
+      background-color: #2980b9;
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-top: 30px;
+      text-decoration: none;
+      color: #3498db;
+      font-weight: bold;
+    }
+
+    .back-link:hover {
+      text-decoration: underline;
+    }
+    @media (max-width: 600px) {
+  .card-container {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+  </style>
+</head>
+<body>
+  <h2>Our Professional Photographers</h2>
+  <div class="card-container">
+    {% for p in photographers %}
+      <div class="photographer-card">
+        <img src="{{ url_for('static', filename='images/' + p.image) }}" alt="{{ p.name }}">
+        <div class="photographer-name">{{ p.name }}</div>
+        <div class="skills"><strong>Skills:</strong> {{ p.skills | join(', ') }}</div>
+     <div class="availability"><strong>Available on:</strong> {{ availability_data[p.id] | join(', ') }}</div>
+
+        <a href="/book" class="book-btn">Book Now</a>
+      </div>
+    {% endfor %}
+  </div>
+  <a href="/" class="back-link">← Back to Home</a>
+</body>
+</html>
